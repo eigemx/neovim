@@ -5,7 +5,7 @@ return {
 			require("mason").setup()
 
 			local registry = require("mason-registry")
-			for _, tool in ipairs({ "ruff", "prettierd", "markdownlint-cli2", "stylua" }) do
+			for _, tool in ipairs({ "ruff", "prettierd", "stylua" }) do
 				local ok, pkg = pcall(registry.get_package, tool)
 				if ok and not pkg:is_installed() then
 					pkg:install()

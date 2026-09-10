@@ -7,6 +7,9 @@ return {
             options = {
                 theme = 'auto',
                 --theme = "codedark",
+                -- Pinned: per-window statuslines, so NvimTree keeps its own
+                -- (disabled/blank) bar instead of sharing a global one.
+                globalstatus = false,
                 disabled_filetypes = {
                     statusline = { 'NvimTree' },
                 },

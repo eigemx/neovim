@@ -49,11 +49,27 @@ vim.opt.cursorline = true
 -- Minimal number of screen lines to keep above and below the cursor.
 vim.opt.scrolloff = 10
 
+-- Per-window statuslines (never a single global bar), so the NvimTree
+-- pane keeps its own disabled/blank statusline (see lualine config).
+vim.opt.laststatus = 2
+
 -- Keep signcolumn visible so diagnostics don't shift the layout
 vim.opt.signcolumn = "yes"
 
 -- Set relative line numbers
 vim.opt.relativenumber = true
+
+-- Blank the statusline row in NvimTree windows. Belt-and-braces next to
+-- lualine's disabled_filetypes: guarantees "nothing under nvim-tree"
+-- whatever the lualine refresh ordering is.
+vim.api.nvim_create_autocmd("FileType", {
+	desc = "Blank statusline in NvimTree windows",
+	group = vim.api.nvim_create_augroup("blank-nvimtree-statusline", { clear = true }),
+	pattern = "NvimTree",
+	callback = function()
+		vim.opt_local.statusline = " "
+	end,
+})
 
 -- Highlight when yanking (copying) text
 --  Try it with `yap` in normal mode
